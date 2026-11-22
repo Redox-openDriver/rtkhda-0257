@@ -1,0 +1,82 @@
+schema = 3
+
+[driver]
+id = "rtkhda-0257"
+family = "rtkhda"
+name = "rtkhda"
+category = "audio"
+status = "research"
+version = "0.1.0"
+license = "AGPL-3.0-or-later"
+repository = "https://github.com/Redox-openDriver/rtkhda-0257"
+keywords = ["sound", "audio", "HD Audio", "HDA", "Realtek", "ALC257", "jack detection", "headphones", "microphone", "Redox"]
+default_language = "ru"
+
+[tags]
+vendor = ["amd", "realtek", "lenovo"]
+class = ["audio"]
+device = ["pci:1022:15e3", "hda:10ec0257"]
+bus = ["pci", "hda"]
+os = ["linux", "redox"]
+arch = ["x86_64"]
+libc = ["glibc", "relibc"]
+init = []
+integration = ["audiod", "pcid"]
+laptop = ["lenovo-thinkbook-16-g6-abp-21kk"]
+language = ["ru", "en"]
+
+[text.ru]
+title = "Открытый драйвер звука HD Audio с переключением по гнёздам"
+summary = "Звук ThinkBook 16 G6 ABP для Redox: наушники и микрофон гарнитуры включаются сами, у каждого выхода своя громкость."
+description = """
+rtkhda — мост от контроллера HD Audio и кодека Realtek ALC257 к библиотеке sonus.
+В Redox демон заменяет ihdad для этого ноутбука и даёт ту же схему audiohw для audiod; он собран, но в Redox ещё не запускался.
+На Linux звуком занимаются ядро и PipeWire, а здесь только инструмент, который по дампу кодека показывает, что сделал бы драйвер.
+"""
+disclaimer = "Независимый открытый проект. Не связан с Lenovo, AMD и Realtek; названия указаны только для обозначения совместимого железа."
+features = [
+  "наушники перехватывают звук при подключении, динамик возвращается при отключении",
+  "наушники включаются не громче безопасного уровня",
+  "свой ЦАП и своя громкость у динамика и наушников, громкость по слуховой кривой",
+  "микрофон гарнитуры, пока она вставлена, иначе встроенный",
+  "та же схема audiohw, что у ihdad, плюс volume и mute",
+]
+
+[text.en]
+title = "Open HD Audio sound driver that follows the jacks"
+summary = "ThinkBook 16 G6 ABP sound on Redox: headphones and the headset microphone come in by themselves, each output keeps its own level."
+description = """
+rtkhda bridges the HD Audio controller and the Realtek ALC257 codec to the sonus library.
+On Redox the daemon replaces ihdad for this laptop and serves the same audiohw scheme to audiod; it builds but has not run on Redox yet.
+On Linux the kernel and PipeWire handle sound; here is only a tool that shows from the codec dump what the driver would do.
+"""
+disclaimer = "An independent open project. Not affiliated with Lenovo, AMD or Realtek; the names only identify compatible hardware."
+features = [
+  "headphones take over when plugged in, the speaker comes back when they are pulled out",
+  "headphones start no louder than a safe level",
+  "the speaker and the headphones each get their own converter and level, on a curve shaped to the ear",
+  "the headset microphone while it is plugged in, the built-in one otherwise",
+  "the same audiohw scheme as ihdad, plus volume and mute",
+]
+
+[[device]]
+bus = "pci"
+vendor = "AMD"
+model = "Ryzen HD Audio controller (1022:15e3) with Realtek ALC257"
+kind = "HD Audio controller and codec"
+laptops = ["Lenovo ThinkBook 16 G6 ABP (21KK)"]
+
+[platform.linux]
+status = "research"
+components = ["rtkhda-dev"]
+requirements = ["/proc/asound codec dumps (snd-hda-intel)"]
+
+[platform.redox]
+status = "research"
+components = ["rtkhdad"]
+requirements = ["pcid", "audiod"]
+
+[links]
+readme = "README.md"
+library = "https://github.com/Redox-openDriver/sonus"
+messages = "https://github.com/Redox-openDriver/drv-i18n"

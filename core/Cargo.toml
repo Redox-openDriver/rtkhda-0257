@@ -1,0 +1,11 @@
+[package]
+name = "rtkhda-core"
+version = "0.1.0"
+description = "Контроллер HD Audio без привязки к ОС: сброс, кольца команд CORB и RIRB, ответы гнёзд, потоки и списки буферов"
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+publish = false
+
+[dependencies]
+sonus = { git = "https://github.com/Redox-openDriver/sonus", tag = "v0.1.0" }

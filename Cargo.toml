@@ -1,0 +1,8 @@
+[workspace]
+resolver = "3"
+members = ["core", "linux"]
+
+[workspace.package]
+edition = "2024"
+license = "AGPL-3.0-or-later"
+repository = "https://github.com/Redox-openDriver/rtkhda-0257"

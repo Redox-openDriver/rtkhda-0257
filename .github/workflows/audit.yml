@@ -1,0 +1,27 @@
+name: audit
+
+on:
+  push:
+    branches: [main]
+    paths: ["**/Cargo.lock"]
+  schedule:
+    - cron: "23 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  advisories:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: ~/.cargo/bin/cargo-audit
+          key: ${{ runner.os }}-cargo-audit-0.23.0
+      - run: command -v cargo-audit || cargo install cargo-audit --locked --version 0.23.0
+      - run: cargo audit
+      - run: cargo audit --file redox/Cargo.lock

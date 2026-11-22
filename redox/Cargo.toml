@@ -1,0 +1,29 @@
+[package]
+name = "rtkhda-redox"
+version = "0.1.0"
+description = "Звук HD Audio с кодеком Realtek ALC257 в Redox OS: контроллер, кодек через sonus, схема audiohw для audiod"
+edition = "2024"
+license = "AGPL-3.0-or-later"
+repository = "https://github.com/Redox-openDriver/rtkhda-0257"
+publish = false
+
+[workspace]
+
+[dependencies]
+rtkhda-core = { path = "../core" }
+sonus = { git = "https://github.com/Redox-openDriver/sonus", tag = "v0.1.0" }
+drv-i18n = { git = "https://github.com/Redox-openDriver/drv-i18n", tag = "v0.1.1" }
+libredox = "0.2"
+redox_event = "0.5"
+redox_syscall = { version = "0.9.5", features = ["std"] }
+redox-scheme = { git = "https://gitlab.redox-os.org/redox-os/redox-scheme.git", default-features = false }
+redox-rings = { git = "https://gitlab.redox-os.org/redox-os/redox-rings.git", features = ["userspace", "sync"] }
+audiod = { git = "https://gitlab.redox-os.org/redox-os/base.git", rev = "8f576d27ee5d028157b001e320affc7b1ec2736b" }
+common = { git = "https://gitlab.redox-os.org/redox-os/base.git", rev = "8f576d27ee5d028157b001e320affc7b1ec2736b" }
+daemon = { git = "https://gitlab.redox-os.org/redox-os/base.git", rev = "8f576d27ee5d028157b001e320affc7b1ec2736b" }
+pcid = { git = "https://gitlab.redox-os.org/redox-os/base.git", rev = "8f576d27ee5d028157b001e320affc7b1ec2736b" }
+scheme-utils = { git = "https://gitlab.redox-os.org/redox-os/base.git", rev = "8f576d27ee5d028157b001e320affc7b1ec2736b" }
+
+[[bin]]
+name = "rtkhdad"
+path = "src/bin/rtkhdad.rs"

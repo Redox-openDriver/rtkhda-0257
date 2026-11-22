@@ -1,0 +1,6 @@
+[[drivers]]
+name = "HD Audio with a Realtek ALC257 (Lenovo 21KK)"
+class = 0x04
+subclass = 0x03
+ids = { 0x1022 = [0x15e3], 0x8086 = [0x293e] }
+command = ["rtkhdad"]
